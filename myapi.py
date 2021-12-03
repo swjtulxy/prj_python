@@ -83,6 +83,22 @@ def getPagetable():
     res = {"res" : pageTable}
     return res
 
+@app.get('clear')
+def clearall():
+    global physicalMemory
+    global tlb
+    global pageTable
+    global pageFaultCounter
+    global tlbHitCounter
+    global addressReadCounter
+    physicalMemory = {}
+    tlb = []
+    pageTable = []
+    pageFaultCounter = 0
+    tlbHitCounter = 0
+    addressReadCounter = 0
+    return 1
+
 if __name__=='__main__':
     import uvicorn
     uvicorn.run(app=app,

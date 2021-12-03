@@ -2,7 +2,7 @@ import part1
 import part2
 
 
-def get_men(logicalAddress):
+def get_men(address_list):
     physicalMemory = {}
     tlb = []
     pageTable = []
@@ -10,28 +10,31 @@ def get_men(logicalAddress):
     tlbHitCounter = 0
     addressReadCounter = 0
     outputFile = open('output.txt', 'w')
-    tlbHit = 0
-    pageTableTrue = 0
-    print(logicalAddress)
-    offset = logicalAddress & 255
-    pageOriginal = logicalAddress & 65280
-    pageNumber = pageOriginal >> 8
-    print("Logical address is: " + str(logicalAddress) + "\nPageNumber is: " + str(pageNumber) + "\nOffset: " + str(offset))
-    addressReadCounter += 1
+    for addr in address_list:
+        print(addr)
+        tlbHit = 0
+        pageTableTrue = 0
+        logicalAddress = int(addr)
+        print(logicalAddress)
+        offset = logicalAddress & 255
+        pageOriginal = logicalAddress & 65280
+        pageNumber = pageOriginal >> 8
+        print("Logical address is: " + str(logicalAddress) + "\nPageNumber is: " + str(pageNumber) + "\nOffset: " + str(offset))
+        addressReadCounter += 1
 
-    tlbHit = part1.checkTLB(pageNumber, physicalMemory, offset, logicalAddress, tlb, addressReadCounter, outputFile)
+        tlbHit = part1.checkTLB(pageNumber, physicalMemory, offset, logicalAddress, tlb, addressReadCounter, outputFile)
 
-    if tlbHit == 1:
-        tlbHitCounter += 1
+        if tlbHit == 1:
+            tlbHitCounter += 1
 
-    if tlbHit != 1:
-        pageTableTrue = part1.checkPageTable(pageNumber, logicalAddress, offset, addressReadCounter, pageTable, physicalMemory, outputFile)
+        if tlbHit != 1:
+            pageTableTrue = part1.checkPageTable(pageNumber, logicalAddress, offset, addressReadCounter, pageTable, physicalMemory, outputFile)
 
-    if pageTableTrue != 1 and tlbHit != 1:
-        print("This is a page fault!")
-        part2.pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory)
-        pageFaultCounter += 1
-        part1.checkTLB(pageNumber, physicalMemory, offset, logicalAddress, tlb, addressReadCounter, outputFile)
+        if pageTableTrue != 1 and tlbHit != 1:
+            print("This is a page fault!")
+            part2.pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory)
+            pageFaultCounter += 1
+            part1.checkTLB(pageNumber, physicalMemory, offset, logicalAddress, tlb, addressReadCounter, outputFile)
 
 
     pageFaultRate = pageFaultCounter / addressReadCounter
@@ -45,5 +48,7 @@ def get_men(logicalAddress):
     print(tlb)
     print (pageTable)
     outputFile.close()
+
+    
     return outStr
     

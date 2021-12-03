@@ -11,6 +11,7 @@ def pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory):
                 break
 
         backStore = open("BACKING_STORE.bin", "rb")
+        print(backStore)
         physicalMemory[int(frameNumber)] = []
 
         for i in range(256):

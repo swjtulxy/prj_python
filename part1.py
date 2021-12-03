@@ -14,10 +14,11 @@ def checkTLB(pageNumber, physicalMemory, offset, logicalAddress, tlb, i, outputF
             print(str(i) + " Virtual address: " + str(logicalAddress) + " Physical address: " + str(
                 physicalAddress) + " Value: " + data)
             outputFile.write(outStr)
+            Pa = physicalAddress
             part2.updateTLBCounter(j, tlb)
-            return 1
+            return 1, Pa, data
 
-    return 0
+    return 0,0,0
 
 
 def checkPageTable(pageNumber, logicalAddress, offset, i, pageTable, physicalMemory, outputFile):
@@ -34,6 +35,6 @@ def checkPageTable(pageNumber, logicalAddress, offset, i, pageTable, physicalMem
                 physicalAddress) + " Value: " + data)
             outputFile.write(outStr)
             part2.updatepageTableCounter(k, pageTable)
-            return 1
+            return 1, physicalAddress, data
 
-    return 0
+    return 0,0,0

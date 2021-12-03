@@ -3,9 +3,10 @@ from fastapi import FastAPI
 from mem_access import get_men
 app = FastAPI()
 
-@app.get('/mem/address={address}')
-def calcalate(address: int=None):
-    res = {"res" : get_men(address)}
+
+@app.get('/mem/addresslist={addresslist}')
+def calcalate(addresslist: str=None):
+    res = {"res" : get_men(addresslist.split('_'))}
     return res
 
 if __name__=='__main__':

@@ -1,6 +1,8 @@
 1 Virtual address: 16916 Physical address: 20 Value: 0
-Number of translated address: 1
-Number of page fault: 1
+2 Virtual address: 48399 Physical address: 271 Value: 67
+3 Virtual address: 64243 Physical address: 755 Value: -68
+Number of translated address: 3
+Number of page fault: 3
 Page fault rate: 1.0
 Number of TLB hits: 0
 TLB hit rate: 0.0

@@ -83,7 +83,7 @@ def getPagetable():
     res = {"res" : pageTable}
     return res
 
-@app.get('clear')
+@app.get('/clear')
 def clearall():
     global physicalMemory
     global tlb

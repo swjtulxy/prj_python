@@ -56,27 +56,23 @@ def get_men(addr):
     # print (pageTable)
     outputFile.close()
     res = {
-        "VA" : logicalAddress,
-        "PageNumber" : pageNumber,
+        "va" : logicalAddress,
+        "pageNumber" : pageNumber,
         "offset" : offset,
-        "Pa" : Pa,
-        "Data" : data,
+        "pa" : Pa,
+        "data" : data,
         "tlbHit" : tlbHit,
         "pageTableTrue" : pageTableTrue,
         "pageFaultRate" : pageFaultRate,
         "tlbHitRate" : tlbHitRate,
+        "tlb" : tlb
     }
-    
+    print(res)
     return res
 
 @app.get('/mem/addr={addr}')
 def calcalate(addr: str=None):
     return get_men(addr)
-
-@app.get('/tlb')
-def gettlb():
-    res = {"res" : tlb}
-    return res
 
 @app.get('/pageTable')
 def getPagetable():
